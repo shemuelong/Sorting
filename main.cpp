@@ -22,6 +22,18 @@ template <class T> void swap2 (T& a, T& b){ //Another swapping function apart fr
     b=std::move(c);
 }
 
+void swap3(int &a, int &b)
+//Another (but interesting) swapping function that accomplishes the task using the properties of addition. A little less versatile but doesnt need a temporary variable.
+{
+    a = a + b; // The value of b is first added to a.
+
+    b = a - b; // b is then set to a - b, which is the original value of a.
+    a = a - b; // Right now, a is currently "original a" + "original b."
+               // b is currently "original a".
+               // In the last line, a - b yields "original b".
+}
+
+
 template <typename E>
 void bubsort(E A[], int n) { // Bubble Sort
     for (int i=0; i<n-1; i++) // Bubble up i’th record
