@@ -63,6 +63,53 @@ void sortNames(char* array[], int size) {
     }
 }
 
+
+void merge(int array[], int low, int high, int mid){
+    int i, j, k, temp[high - low + 1];
+    i = low;
+    k = 0;
+    j = mid + 1;
+
+    while(i <= mid && j <= high){
+        if (array[i] < array[j]){
+            temp[k] = array[i];
+            i++;
+            k++;
+        }
+        else{
+            temp[k] = array[j];
+            j++;
+            k++;
+        }
+    }
+
+    while (i <= mid){
+        temp[k] = array[i];
+        i++;
+        k++;
+    }
+
+    while (j <= high){
+        temp[k] = array[j];
+        j++;
+        k++;
+    }
+
+    for (i = low; i < k; i++) {
+        array[i] = temp[i];
+    }
+}
+
+void mergeSort(int array[], int leftStart, int rightEnd){
+    if (leftStart < rightEnd){
+        int middle = (rightEnd + leftStart) / 2;
+        mergeSort(array, leftStart, middle);
+        mergeSort(array, middle + 1, rightEnd);
+
+        merge(array, leftStart, rightEnd, middle);
+    }
+}
+
 int main() {
     const int SIZE  = 6;
 
@@ -70,11 +117,12 @@ int main() {
     int array[SIZE] = {12,45,23,46,7,2};
     int array2[SIZE] = {12,45,23,46,7,2};
     int array3[SIZE] = {12,45,23,46,7,2};
+    int array4[SIZE] = {12,45,23,46,7,2};
 
     char *test[] = {"James", "Jame", "Jaame", "Jab", "Jack"};
 
 
-    //Basic sorting functions are used on three separate arrays that are initialized with the same data
+    //Sorting functions are used on four separate arrays that are initialized with the same data
     //The likeness of the cout outputs show that each function sorted each array properly
     bubsort(array,SIZE);
     for(int i = 0; i < SIZE - 1; i++){
@@ -91,6 +139,12 @@ int main() {
     inssort(array3,SIZE);
     for(int i = 0; i < SIZE - 1; i++){
         std::cout << array3[i] << "  ";
+    }
+    std::cout << std::endl;
+    
+    mergeSort(array4, 0, SIZE - 1);
+    for(int i = 0; i < SIZE; i++){
+        std::cout << array4[i] << "  ";
     }
     std::cout << std::endl;
 
