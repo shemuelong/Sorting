@@ -5,13 +5,84 @@
  * Algorithms taken from Clifford A. Shaffer, Data Structures and Algorithm Analysis Edition 3.2
  */
 
-void swapper(int& x, int& y){   //Generic swapping function for two variables
+void swapper(int& x, int& y); //Generic swapping function given two variables
+
+template <typename E> void swap(E x[], int a, int b; //Generic swapping function given two elements in an array
+          
+template <class T> void swap2 (T& a, T& b); //Another swapping function apart from the generic methods, using features of C++11
+                                
+void swap3(int &a, int &b); 
+//Another (but interesting) swapping function that accomplishes the task using the properties of addition. 
+// It is a little less versatile but doesnt need a temporary variable.                                
+                                
+template <typename E> void bubsort(E A[], int n);
+                                
+template <typename E> void selsort(E A[], int n);
+                                
+template <typename E> void inssort(E A[], int n);    
+                                
+void sortNames(char* array[], int size);       
+                                
+void mergeSort(int array[], int leftStart, int rightEnd); //Mergesort Function                               
+void merge(int array[], int low, int high, int mid); //Merge Function for Mergesort  
+                                
+int main() {
+    const int SIZE  = 6;
+
+
+    int array[SIZE] = {12,45,23,46,7,2};
+    int array2[SIZE] = {12,45,23,46,7,2};
+    int array3[SIZE] = {12,45,23,46,7,2};
+    int array4[SIZE] = {12,45,23,46,7,2};
+
+    char *test[] = {"James", "Jame", "Jaame", "Jab", "Jack"};
+
+
+    //Sorting functions are used on four separate arrays that are initialized with the same data
+    //The likeness of the cout outputs show that each function sorted each array properly
+    bubsort(array,SIZE);
+    for(int i = 0; i < SIZE - 1; i++){
+        std::cout << array[i] << "  ";
+    }
+    std::cout << std::endl;
+
+    selsort(array2,SIZE);
+    for(int i = 0; i < SIZE - 1; i++){
+        std::cout << array2[i] << "  ";
+    }
+    std::cout << std::endl;
+
+    inssort(array3,SIZE);
+    for(int i = 0; i < SIZE - 1; i++){
+        std::cout << array3[i] << "  ";
+    }
+    std::cout << std::endl;
+    
+    mergeSort(array4, 0, SIZE - 1);
+    for(int i = 0; i < SIZE; i++){
+        std::cout << array4[i] << "  ";
+    }
+    std::cout << std::endl;
+
+
+    //Demonstrates the sorting of names, with Selection Sort based function "sortNames" working on an a 2D array of characters.
+    int size = sizeof(test)/sizeof(char*);
+    sortNames(test,size);
+
+    for(int i = 0; i <5; i++){
+        std::cout << test[i] << " ";
+    }
+
+    return 0;
+}
+
+                                void swapper(int& x, int& y){   //Generic swapping function given two variables
     int temp  = x;
     x = y;
     y = temp;
 }
 template <typename E>
-void swap(E x[], int a, int b){ //Generic swapping functino for two elements in an array
+void swap(E x[], int a, int b){ //Generic swapping function given two elements in an array
     E temp = x[a];
     x[a] = x[b];
     x[b] = temp;
@@ -120,54 +191,4 @@ void mergeSort(int array[], int leftStart, int rightEnd){
 
         merge(array, leftStart, rightEnd, middle);
     }
-}
-
-int main() {
-    const int SIZE  = 6;
-
-
-    int array[SIZE] = {12,45,23,46,7,2};
-    int array2[SIZE] = {12,45,23,46,7,2};
-    int array3[SIZE] = {12,45,23,46,7,2};
-    int array4[SIZE] = {12,45,23,46,7,2};
-
-    char *test[] = {"James", "Jame", "Jaame", "Jab", "Jack"};
-
-
-    //Sorting functions are used on four separate arrays that are initialized with the same data
-    //The likeness of the cout outputs show that each function sorted each array properly
-    bubsort(array,SIZE);
-    for(int i = 0; i < SIZE - 1; i++){
-        std::cout << array[i] << "  ";
-    }
-    std::cout << std::endl;
-
-    selsort(array2,SIZE);
-    for(int i = 0; i < SIZE - 1; i++){
-        std::cout << array2[i] << "  ";
-    }
-    std::cout << std::endl;
-
-    inssort(array3,SIZE);
-    for(int i = 0; i < SIZE - 1; i++){
-        std::cout << array3[i] << "  ";
-    }
-    std::cout << std::endl;
-    
-    mergeSort(array4, 0, SIZE - 1);
-    for(int i = 0; i < SIZE; i++){
-        std::cout << array4[i] << "  ";
-    }
-    std::cout << std::endl;
-
-
-    //Demonstrates the sorting of names, with Selection Sort based function "sortNames" working on an a 2D array of characters.
-    int size = sizeof(test)/sizeof(char*);
-    sortNames(test,size);
-
-    for(int i = 0; i <5; i++){
-        std::cout << test[i] << " ";
-    }
-
-    return 0;
 }
